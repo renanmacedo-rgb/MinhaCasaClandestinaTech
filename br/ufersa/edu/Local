@@ -1,0 +1,67 @@
+import br.ufersa.edu.Responsavel;
+
+public class Local extends Responsavel{
+    private int id;
+    private String nomeDaCasa;
+    private String endereco;
+    private String compartimento;
+
+    public Local(int id, String nome, String endereco, String compartimento){
+        setId(id);
+        setNome(nome);
+        setEndereco(endereco);
+        setCompartimento(compartimento);
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public String getNome(){
+        return nome;
+    }
+
+    public String getEndereco(){
+        return endereco;
+    }
+
+    public String getCompartimento(){
+        return compartimento;
+    }
+
+    public void setId(int id){
+        if(id == null){
+            System.out.println("ID inválido");
+        }
+        else {
+            this.id = id;
+        }
+    }
+
+    public void setNome(String nome){
+        if (nome == null){
+            System.out.println("Nome inválido");
+        }
+        else{
+            this.nome = nome;
+        }
+    }
+
+    public void setEndereco(String endereco){
+        if (endereco == null){
+            System.out.println("Endereço inválido");
+        }
+        else{
+            this.endereco = endereco;
+        }
+    }
+
+    public void setCompartimento(String compartimento){
+        if (compartimento == null){
+            System.out.println("Compartimento inválido");
+        }
+        else{
+            this.compartimento = compartimento;
+        }
+    }
+}

@@ -1,0 +1,65 @@
+public class Responsavel{
+    private int id;
+    private String nome;
+    private String endereco;
+    private int telefone;
+
+    public Responsavel(int id, String nome, String endereco, int telefone){
+        setId(id);
+        setNome(nome);
+        setEndereco(endereco);
+        setTelefone(telefone);
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public String getNome(){
+        return nome;
+    }
+
+    public String getEndereco(){
+        return endereco;
+    }
+
+    public int getTelefone(){
+        return telefone;
+    }
+
+    public void setId(int id){
+        if(id == null){
+            System.out.println("ID inválido");
+        }
+        else {
+            this.id = id;
+        }
+    }
+
+    public void setNome(String nome){
+        if (nome == null){
+            System.out.println("Nome inválido");
+        }
+        else{
+            this.nome = nome;
+        }
+    }
+
+    public void setEndereco(String endereco){
+        if (endereco == null){
+            System.out.println("Endereço inválido");
+        }
+        else{
+            this.endereco = endereco;
+        }
+    }
+
+    public void setTelefone(int telefone){
+        if (telefone == null){
+            System.out.println("Telefone inválido");
+        }
+        else{
+            this.telefone = telefone;
+        }
+    }
+}
