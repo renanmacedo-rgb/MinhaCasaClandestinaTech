@@ -1,5 +1,6 @@
 package br.ufersa.edu;
 
+import br.ufersa.edu.Responsavel;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
