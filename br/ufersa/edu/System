@@ -1,0 +1,91 @@
+package br.ufersa.edu;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Sistema {
+    private List<Venda> vendas;
+    private List<Compra> compras;
+    private List<Cliente> clientes;
+    private Estoque estoque;
+
+    public Sistema() {
+        vendas = new ArrayList<>();
+        compras = new ArrayList<>();
+        clientes = new ArrayList<>();
+        estoque = new Estoque();
+    }
+
+    public void cadastrarEquipamento(Equipamento e) {
+        estoque.adicionar(e);
+    }
+
+    public void cadastrarCliente(Cliente c) {
+        clientes.add(c);
+    }
+
+    public void registrarCompra(Compra c) {
+        for (Item item : c.getItens()) {
+            Equipamento eq = estoque.buscarPorNumeroSerie(item.getEquipamento().getNumeroDeSerie());
+            if (eq == null){
+                estoque.adicionar(item.getEquipamento());
+                eq = item.getEquipamento();
+            }
+            eq.aumentarEstoque(item.getQuantidade());
+        }
+        compras.add(c);
+    }
+
+    public void registrarVenda(Venda v) {
+        for (Item item : v.getItens()) {
+            Equipamento eq = estoque.buscarPorNumeroSerie(item.getEquipamento().getNumeroDeSerie());
+            if (eq == null){
+                System.out.println("Equipamento " + item.getEquipamento().getNome() + " não está no estoque");
+            }
+            if (eq.getQtdeEmEstoque() < item.getQuantidade()){
+                System.out.println("Estoque insuficiente de " + eq.getNome());
+            }
+        }
+
+        for (Item item : v.getItens()){
+            Equipamento eq = estoque.buscarPorNumeroSerie(item.getEquipamento().getNumeroDeSerie());
+            eq.diminuirEstoque(item.getQuantidade());
+        }
+        vendas.add(v);
+    }
+
+    public void cancelarVenda(Venda v) {
+        if (!vendas.contains(v)){
+            System.out.println("Venda não encontrada no sistema");
+        }
+
+        if (v.isCancelada()){
+            System.out.println("Venda já está cancelada");
+        }
+
+        for (Item item : v.getItens()){
+            Equipamento eq = estoque.buscarPorNumeroSerie(item.getEquipamento().getNumeroDeSerie());
+            if (eq != null){
+                eq.aumentarEstoque(item.getQuantidade());
+            }
+        }
+        v.cancelar();
+    }
+
+    public void gerarRelatorio(LocalDate inicio, LocalDate fim) {
+        RelatorioVendas.gerarPorPeriodo(vendas, inicio, fim);
+    }
+
+    public Estoque getEstoque(){
+        return estoque;
+    }
+    
+    public List<Cliente> getClientes(){
+        return clientes;
+    }
+
+    public List<Venda> getVendas(){
+        return vendas;
+    }
+}

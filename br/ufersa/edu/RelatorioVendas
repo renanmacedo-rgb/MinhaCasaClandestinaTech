@@ -1,0 +1,29 @@
+package br.ufersa.edu;
+
+import java.time.LocalDate;
+import java.util.List;
+
+public class RelatorioVendas {
+    public static void gerarPorPeriodo(List<Venda> vendas, LocalDate inicio, LocalDate fim) {
+        System.out.println("--- Relatório de Vendas ---");
+        System.out.println("Periodo: " + inicio + " a " + fim);
+        double totalGeral = 0;
+        int contador = 0;
+
+        for (Venda v : vendas) {
+            if (!v.isCancelada() && !v.getData().isBefore(inicio) && !v.getData().isAfter(fim)) {
+                System.out.println(v);
+                System.out.println();
+                totalGeral += v.calcularTotal();
+                contador++;
+            }
+        }
+
+        if (contador == 0){
+            System.out.println("Nenhuma venda feita");
+        }
+        else{
+            System.out.printf("Total de vendas: %d | Faturamento total: R$ %.2f%n", contador, totalGeral);
+        }
+    }
+}

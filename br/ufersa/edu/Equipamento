@@ -1,0 +1,120 @@
+package br.ufersa.edu;
+
+public class Equipamento {
+    private String nome;
+    private int numeroDeSerie;
+    private double preco;
+    private int qtdeEmEstoque;
+    private Local local;
+    private Responsavel responsavel;
+
+    public Equipamento(String nome, int numeroDeSerie, double preco, int qtdeEmEstoque,
+                        Local local, Responsavel responsavel) {
+        setNome(nome);
+        setNumeroDeSerie(numeroDeSerie);
+        setPreco(preco);
+        setQtdeEmEstoque(qtdeEmEstoque);
+        setLocal(local);
+        setResponsavel(responsavel);
+        validarConsistenciaLocalResponsavel();
+    }
+
+    public String getNome(){
+        return nome;
+    }
+
+    public int getNumeroDeSerie(){
+        return numeroDeSerie;
+    }
+
+    public double getPreco(){
+        return preco;
+    }
+
+    public int getQtdeEmEstoque(){
+        return qtdeEmEstoque;
+    }
+
+    public Local getLocal(){
+        return local;
+    }
+
+    public Responsavel getResponsavel(){
+        return responsavel;
+    }
+
+    public void setNome(String nome) {
+        if (nome == null){
+            System.out.println("Nome do equipamento inválido");
+        }
+        else {
+            this.nome = nome;
+        }
+    }
+
+    public void setNumeroDeSerie(int numeroDeSerie) {
+         if (numeroDeSerie == null){
+            System.out.println("Número de série inválido");
+        }
+        else {
+            this.numeroDeSerie = numeroDeSerie;
+        }
+    }
+
+    public void setPreco(double preco) {
+        if (preco <= 0){
+            System.out.println("Preço deve ser maior que zero");
+        }
+        else{
+            this.preco = preco;
+        }
+    }
+
+    public void setQtdeEmEstoque(int qtdeEmEstoque) {
+        if (qtdeEmEstoque < 0){
+            System.out.println("Quantidade não pode ser negativa");
+        }
+        else{
+            this.qtdeEmEstoque = qtdeEmEstoque;
+        }
+    }
+
+    public void setLocal(Local local) {
+        if (local == null){
+            System.out.println("Local inválido");
+        }
+        else{
+            this.local = local;
+        }
+    }
+
+    public void setResponsavel(Responsavel responsavel) {
+        if (responsavel == null){
+            System.out.println("Responsável inválido");
+        }
+        else{
+            this.responsavel = responsavel;
+        }
+    }
+
+    public void aumentarEstoque(int qtd) {
+        if (qtd <= 0){
+            System.out.println("Quantidade a aumentar deve ser positiva");
+        }
+        else{
+            this.qtdeEmEstoque += qtd;
+        }
+    }
+
+    public void diminuirEstoque(int qtd) {
+        if (qtd <= 0){
+            System.out.println("Quantidade a diminuir deve ser positiva");
+        }
+
+        if (this.qtdeEmEstoque < qtd){
+            System.out.println("Estoque insuficiente");
+        }
+        
+        this.qtdeEmEstoque -= qtd;
+    }
+}

@@ -1,0 +1,73 @@
+package br.ufersa.edu;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Compra extends Responsavel {
+    private int id;
+    private List<Item> itens;
+    private int qtd;
+    private LocalDate data;
+
+    public Compra(int id, LocalDate data, String nomeResponsavel, int cpf, int telefone, String casa) {
+        super(nomeResponsavel, cpf, telefone, casa);
+        setId(id);
+        setData(data);
+        this.itens = new ArrayList<>();
+        this.qtde = 0;
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public LocalDate getData(){
+        return data;
+    }
+    
+    public List<Item> getItens(){
+        return Collections.unmodifiableList(itens);
+    }
+
+    public int getQtd(){
+        return qtd;
+    }
+
+    public void setId(){
+        if(id == null){
+            System.out.println("ID inválido");
+        }
+        else {
+            this.id = id;
+        }
+    }
+
+    public void setData(LocalDate data){
+        if (data == null){
+            System.out.println("Data inválida");
+        }
+        else{
+            this.data = LocalDate.now();
+        }
+    }
+
+    public void adicionarItem(Item item){
+        if (item == null){
+            ("Item inválido");
+        }
+
+        for (Item i : itens) {
+            if (i.getEquipamento().getNumeroDeSerie() == item.getEquipamento().getNumeroDeSerie()){
+                System.out.println("Equipamento já adicionado");
+            }
+        }
+        itens.add(item);
+        qtde += item.getQuantidade();
+    }
+
+    public double calcularTotal(){
+        return itens.stream().mapToDouble(Item::calcularSubtotal).sum();
+    }
+}

@@ -1,0 +1,36 @@
+package br.ufersa.edu;
+
+import br.ufersa.edu.Equipamento;
+
+public class Item extends Equipamento {
+    private int quantidade;
+    private double precoUnitario;
+
+    public Item(Equipamento equipamento, int quantidade){
+        super(equipamento.getNome(), equipamento.getNumeroDeSerie(), equipamento.getPreco(),
+              equipamento.getQtdeEmEstoque(), equipamento.getLocal(), equipamento.getResponsavel());
+        setQuantidade(quantidade);
+        this.precoUnitario = equipamento.getPreco();
+    }
+
+    public int getQuantidade(){
+        return quantidade;
+    }
+    
+    public double getPrecoUnitario(){
+        return precoUnitario;
+    }
+
+    public void setQuantidade(int quantidade){
+        if (quantidade <= 0){
+            System.out.println("Quantidade deve ser positiva");
+        }
+        else{
+            this.quantidade = quantidade;
+        }
+    }
+
+    public double calcularSubtotal() {
+        return quantidade * precoUnitario;
+    }
+}
